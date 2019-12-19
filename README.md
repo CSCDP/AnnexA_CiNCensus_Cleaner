@@ -10,7 +10,7 @@ You can find more info about Social Finance Digital Labs on our website: https:/
 
 # How to run this programme
 
-To run this programme, you will need to have installed Python and created a conda environment with #####.
+To run this programme, you will need to have installed Python and created a conda environment aligned with requirements.txt.
 
 Once that is done, follow the steps detailed below:
 1. Create a local configuration file
