@@ -1,0 +1,925 @@
+data_config:
+    List 1:
+        Gender: 
+            &gen
+                - code: b) Female
+                  name: F
+                  regex:
+                    - /^fem.*/i
+                    - /b\).*/i
+                - code: a) Male
+                  name: M
+                  regex:
+                    - /^mal.*/i
+                    - /a\).*/i
+                - code: c) Not stated/recorded
+                  name: Not stated/recorded
+                  regex:
+                    - /not.*/i
+                    - /.*unknown.*/i
+                    - /.*indeterminate.*/i
+                    - /c\).*/i
+                - code: d) Neither
+                  name: Neither
+                  regex:
+                    - /d\).*/i
+        Ethnicity:
+            &eth
+                - code: a) WBRI
+                  name: White British
+                  regex: 
+                    - /.*whi.*british.*/i
+                    - /a\).*/i
+                    - /WBRI.*/i
+                - code: b) WIRI
+                  name: White Irish
+                  regex:
+                    - /.*whi.*\sir.*/i
+                    - /b\).*/i
+                    - /WIRI.*/i
+                - code: c) WIRT
+                  name: Traveller of Irish heritage
+                  regex:
+                    - /^tra.*\sirish.*/i
+                    - /c\).*/i
+                    - /WIRT.*/i
+                - code: d) WOTH
+                  name: Any other White background
+                  regex:
+                    - /.*oth.*\swhi.*/i
+                    - /d\).*/i
+                    - /WOTH.*/i
+                - code: e) WROM
+                  name: Gypsy/Roma
+                  regex:
+                    - /^gy.*/i
+                    - /.*roma.*/i
+                    - /e\).*/i
+                    - /WROM.*/i
+                - code: f) MWBC
+                  name: White and Black Caribbean
+                  regex: 
+                    - /^w.*\sb.*\sca.*/i
+                    - /f\).*/i
+                    - /MWBC.*/i
+                - code: g) MWBA
+                  name: White and Black African
+                  regex:
+                    - /^w.*\sb.*\saf.*/i
+                    - /g\).*/i
+                    - /MWBA.*/i
+                - code: h) MWAS
+                  name: White and Asian
+                  regex:
+                    - /^w.*\sa.*/i
+                    - /h\).*/i
+                    - /MWAS.*/i
+                - code: i) MOTH
+                  name: Any other Mixed background
+                  regex:
+                    - /.*oth.*\smix.*/i
+                    - /i\).*/i
+                    - /MOTH.*/i
+                - code: j) AIND
+                  name: Indian
+                  regex:
+                    - /^in.*/i
+                    - /j\).*/i
+                    - /AIND.*/i
+                - code: k) APKN
+                  name: Pakistani
+                  regex:
+                    - /^pak.*/i
+                    - /k\).*/i
+                    - /APKN.*/i
+                - code: l) ABAN
+                  name: Bangladeshi
+                  regex:
+                    - /^ban.*/i
+                    - /l\).*/i
+                    - /ABAN.*/i
+                - code: m) AOTH
+                  name: Any other Asian background
+                  regex:
+                    - /.*asian.*/i
+                    - /m\).*/i
+                    - /AOTH.*/i
+                - code: n) BCRB
+                  name: Caribbean
+                  regex:
+                    - /^car.*/i
+                    - /n\).*/i
+                    - /BCRB.*/i
+                - code: o) BAFR
+                  name: African
+                  regex:
+                    - /^af.*/i
+                    - /o\).*/i
+                    - /BAFR.*/i
+                - code: p) BOTH
+                  name: Any other Black background
+                  regex:
+                    - /.*oth.*\sbl.*/i
+                    - /p\).*/i
+                    - /BOTH.*/i
+                - code: q) CHNE
+                  name: Chinese
+                  regex:
+                    - /^ch.*/i
+                    - /q\).*/i
+                    - /CHNE.*/i
+                - code: r) OOTH
+                  name: Any other ethnic group
+                  regex:
+                    - /.*oth.*\seth.*/i
+                    - /r\).*/i
+                    - /OOTH.*/i
+                - code: s) REFU
+                  name: Refused
+                  regex:
+                    - /^ref.*/i
+                    - /.*did\snot\swish.*/i
+                    - /REFU.*/i
+                - code: s) NOBT
+                  name: Information not yet obtained
+                  regex:
+                    - /.*info.*/i
+                    - /.*not.*\sobtained.*/i
+                    - /NOBT.*/i
+        Contact Source:
+            &source
+                - code: 'a) 1A: Individual'
+                  name: INDIVIDUAL – family member, relative or carer
+                  regex:
+                    - /.*family.*/i
+                    - /.*relative.*/i
+                    - /.*carer.*/i
+                    - /.*1A.*/i
+                - code: 'b) 1B: Individual'
+                  name: INDIVIDUAL – acquaintance (including neighbours and child minders)
+                  regex:
+                    - /.*acqua.*/i
+                    - /.*1B.*/i
+                - code: 'c) 1C: Individual'
+                  name: INDIVIDUAL – self
+                  regex:
+                    - /.*self.*/i
+                    - /.*1C.*/i
+                - code: 'd) 1D: Individual'
+                  name: INDIVIDUAL – other (including strangers)
+                  regex:
+                    - /.*individual.*\sother.*/i
+                    - /.*1D.*/i
+                - code: 'i) 3C: Health services' # Moving up for regex purposes
+                  name: HEALTH SERVICES – school nurse
+                  regex:
+                    - /.*scho.*\snurse.*/i
+                    - /.*3C.*/i
+                - code: 'e) 2A: Schools'
+                  name: SCHOOLS
+                  regex:
+                    - /^school.*/i
+                    - /.*2A.*/i
+                - code: 'f) 2B: Education services'
+                  name: EDUCATION SERVICES
+                  regex:
+                    - /.*educat.*/i
+                    - /.*2B.*/i
+                - code: 'g) 3A: Health services'
+                  name: HEALTH SERVICES – general practitioner (GP)
+                  regex:
+                    - /.*\sgp.*/i
+                    - /^gp.*/i
+                    - /.*3A.*/i
+                - code: 'h) 3B: Health services'
+                  name: HEALTH SERVICES – health visitor
+                  regex:
+                    - /.*hea.*\svisi.*/i
+                    - /.*3B.*/i
+                - code: 'j) 3D: Health services'
+                  name: HEALTH SERVICES – other primary health services
+                  regex:
+                    - /.*other.*\sprimary.*/i
+                    - /.*3D.*/i
+                - code: 'k) 3E: Health services'
+                  name: HEALTH SERVICES – A&E (accident and emergency department)
+                  regex:
+                    - /.*a&e.*/i
+                    - /.*3E.*/i
+                - code: 'l) 3F: Health services'
+                  name: HEALTH SERVICES – other (for example hospice) #This one is not working with West Berkshire
+                  regex:
+                    - /.*other.*\shealth.*/i 
+                    - /.*health.*\sother.*/i
+                    - /.*hospice.*/i
+                    - /.*3F.*/i
+                - code: 'o) 5B: LA services'
+                  name: LA SERVICES – other internal (department other than social care in local authorities, for example, youth offending (excluding housing))
+                  regex:
+                    - /.*other.*internal.*/i
+                    - /.*5B.*/i
+
+                - code: 'p) 5C: LA services'
+                  name: LA SERVICES – external, for example, from another local authority’s adults social care services
+                  regex:
+                    - /.*external/i # Southampton had 'LA : OTHER THAN SCC' -- not picking that up
+                    - /.*5C.*/i
+                - code: 'n) 5A: LA services' # Moving down for regex purposes
+                  name: LA SERVICES – social care for example adults social care services
+                  regex:
+                    - /.*social\scare.*/i
+                    - /.*5A.*/i            
+                - code: 'm) 4: Housing' # Moving this down for regex purposes
+                  name: HOUSING - local authority housing or housing association
+                  regex:
+                    - /.*housing.*/i
+                    - /.*4.*/i
+                - code: 'q) 6: Police'
+                  name: POLICE
+                  regex:
+                    - /^poli.*/i
+                    - /.*6.*/i
+                - code: 'r) 7: Other legal agency'
+                  name: OTHER LEGAL AGENCY – including courts, probation, immigration, CAFCASS (Children and Family Court Advisory and Support Service) or prison
+                  regex:
+                    - /.*other\slegal.*/i
+                    - /.*7.*/i
+                - code: 's) 8: Other'
+                  name: OTHER – including children’s centres, independent agency providers or voluntary organisations
+                  regex:
+                    - /^other.*/i # How do we prevent picking up all the 'Other'?
+                    - /.*8.*/i
+                - code: 't) 9: Anonymous'
+                  name: ANONYMOUS
+                  regex:
+                    - /^anon.*/i
+                    - /.*9.*/i
+                - code: 'u) 10: Unknown'
+                  name: UNKNOWN
+                  regex:
+                    - /^unk.*/i
+                    - /.*10.*/i
+    List 2:
+        Ethnicity: *eth
+        Gender: *gen
+
+    List 3:
+        Ethnicity: *eth
+        Gender: *gen
+        Referral Source: *source
+        Referral NFA?:
+            &bool
+                - code: a) Yes
+                  name: "Yes"
+                  regex:
+                    - /Y.*/i
+                    - /a\).*/i
+                - code: b) No
+                  name: "No"
+                  regex:
+                    - /N.*/i
+                    - /b\).*/i
+                - code: c) Unknown
+                  name: "Unknown"
+                  regex:
+                    - /unkn.*/i
+                    - /c\).*/i
+
+    List 4:
+        Ethnicity: *eth
+        Gender: *gen
+        Does the Child have a Disability: *bool
+        Child Seen During Continuous Assessment: *bool
+        "Was the child assessed as requiring LA children's social care support": *bool # This is a new column
+
+    List 5:
+        Ethnicity: *eth
+        Gender: *gen
+        Does the Child have a Disability: *bool
+        Was an Initial Child Protection Conference deemed unnecessary?: *bool
+        Did the Initial Child Protection Conference Result in a Child Protection Plan: *bool
+
+    List 6:
+        Ethnicity: *eth
+        Gender: *gen
+        Does the Child have a Disability: *bool
+        Primary Need Code:
+            &needcode
+                - code: N1 - Abuse or neglect
+                  name: Abuse or neglect
+                  regex: 
+                    - /.*abuse.*/i
+                    - /.*neglect.*/i
+                    - /.*N1.*/i
+                - code: "N2 - Child's disability"
+                  name: "Child's disability"
+                  regex:
+                    - /.*child.*disab.*/i
+                    - /.*N2.*/i
+                - code: N3 - Parental disability or illness
+                  name: Parental disability or illness
+                  regex:
+                    - /.*parent.*disab.*/i
+                    - /.*parent.*ill.*/i
+                    - /.*N3.*/i
+                - code: N4 - Family in acute stress
+                  name: Family in acute stress
+                  regex:
+                    - /.*family.*stress.*/i
+                    - /.*N4.*/i
+                - code: N5 - Family dysfunction
+                  name: Family dysfunction
+                  regex:
+                    - /.*family.*dys.*/i
+                    - /.*N5.*/i
+                - code: N6 - Socially unacceptable behaviour
+                  name: Socially unacceptable behaviour
+                  regex:
+                    - /.*behav.*/i
+                    - /.*N6.*/i
+                - code: N7 - Low income
+                  name: Low income
+                  regex:
+                    - /.*income.*/i
+                    - /.*N7.*/i
+                - code: N8 - Absent parenting
+                  name: Absent parenting
+                  regex:
+                    - /.*absent.*/i
+                    - /.*N8.*/i
+                - code: N9 - Cases other than children in need
+                  name: Cases other than children in need
+                  regex:
+                    - /.*other.*/i
+                    - /.*N9.*/i
+                - code: N0 - Not stated
+                  name: Not stated
+                  regex:
+                    - /.*N0.*/i
+        Reason for Closure:
+            &reason
+                - code: RC1 - Adopted
+                  name: Adopted
+                  regex:
+                    - /^adopt.*/i
+                    - /.*RC1.*/i
+                - code: RC2 - Died
+                  name: Died
+                  regex:
+                    - /.*death.*/i
+                    - /.*RC2.*/i
+                - code: RC3 - Child arrangements order
+                  name: Child arrangements order
+                  regex:
+                    - /.*arrangement.*\sorder.*/i
+                    - /.*RC3.*/i
+                - code: RC4 - Special guardianship order
+                  name: Special guardianship order
+                  regex:
+                    - /.*guardian.*\sorder.*/i
+                    - /.*RC4.*/i
+                - code: RC5 - Transferred to services of another local authority
+                  name: Transferred to services of another local authority
+                  regex:
+                    - /.*transfer.*local.*author/i
+                    - /.*transfer.*la$/i
+                    - /.*RC5.*/i
+                - code: RC6 - Transferred to adult social care services
+                  name: Transferred to adult social care services
+                  regex:
+                    - /.*transfer.*adult.*/i
+                    - /.*RC6.*/i
+                - code: RC7 - Services ceased for any other reason, including child no longer in need
+                  name: Services ceased for any other reason, including child no longer in need
+                  regex:
+                    - /.*ceased.*/i
+                    - /.*no.*\sneed.*/i
+                    - /.*work.*\scompleted.*/i
+                    - /.*refused.*/i
+                    - /.*RC7.*/i
+                - code: RC8 - Case closed after assessment, no further action
+                  name: Case closed after assessment, no further action
+                  regex:
+                    - /.*closed.*\sassess.*/i
+                    - /.*no further action.*/i
+                    - /.*NFA.*/i
+                    - /.*RC8.*/i
+        Case status:
+            &casestatus
+                - code: a) Looked after child
+                  name: Looked after child
+                  regex:
+                    - /.*looked.*/i
+                    - /.*a\).*/i
+                - code: b) Child Protection plan
+                  name: Child Protection plan
+                  regex:
+                    - /.*protection.*/i
+                    - /.*b\).*/i
+                - code: c) Child in need plan
+                  name: Child in need plan
+                  regex:
+                    - /.*need.*/i
+                    - /.*c\).*/i
+                - code: d) Open assessment
+                  name: Open assessment
+                  regex:
+                    - /.*assess.*/i
+                    - /.*d\).*/i
+                - code: e) Closed episode
+                  name: Closed episode
+                  regex:
+                    - /.*closed.*/i
+                    - /.*e\).*/i
+    List 7:
+        Ethnicity: *eth
+        Gender: *gen
+        Does the Child have a Disability: *bool
+        Initial Category of Abuse:
+            &cat_abuse
+                - code: a) Neglect
+                  name: Neglect
+                  regex:
+                    - /.*a\).*/i
+                    - /.*NEG.*/i
+                - code: b) Physical abuse
+                  name: Physical abuse
+                  regex:
+                    - /.*PHY*/i
+                    - /.*b\).*/i
+                - code: c) Sexual abuse
+                  name: Sexual abuse
+                  regex:
+                    - /.*sexual*/i
+                    - /.*SAB.*/i
+                    - /.*c\).*/i
+                - code: d) Emotional abuse
+                  name: Emotional abuse
+                  regex:
+                    - /.*EMO*/i
+                    - /.*d\).*/i
+                - code: e) Multiple/not recommended
+                  name: Multiple/not recommended
+                  regex:
+                    - /.*MUL/i
+                    - /.*e\).*/i
+        Latest Category of Abuse: *cat_abuse
+        Was the Child Seen Alone?: *bool
+        Subject to Emergency Protection Order or Protected Under Police Powers in Last Six Months (Y/N): *bool
+
+    List 8:
+        Ethnicity: *eth
+        Gender: *gen
+        Unaccompanied Asylum Seeking Child (UASC) within the Last 12 Months (Y/N): *bool
+        Does the Child have a Disability: *bool
+        Child's Category of Need: *needcode
+        Is this a second or subsequent period of being a Looked After Child within the last 12 months (Y/N): *bool
+        Child's Legal Status:
+            &legal_status
+                - code: 'E1: Placement order' #Moved up for regex purposes
+                  name: Placement order
+                  regex:
+                    - /^E1.*/i
+                    - /.*simultaneous.*/i
+                - code: 'C1: ICO'
+                  name: ICO
+                  regex:
+                    - /.*interim\scare\sorder.*/i
+                    - /^C1.*/i
+                - code: 'C2: FCO'
+                  name: FCO
+                  regex:
+                    - /.*full\scare\sorder/i
+                    - /^C2.*/i
+                - code: 'D1: Freeing order'
+                  name: Freeing order
+                  regex:
+                    - /^D1.*/i
+                - code: 'V2: Single period under S20'
+                  name: Single period under S20
+                  regex:
+                    - /.*s20.*/i
+                    - /.*single.*/speriod.*/i
+                    - /.*section\s20.*/i
+                    - /^V2.*/i
+                - code: 'L1: Police protection LA accommodation'
+                  name: Police protection LA accommodation
+                  regex:
+                    - /.*police.*/i
+                    - /L1.*/i
+                - code: 'L2: EPO'
+                  name: EPO
+                    - /.*emergency.*/i
+                    - /.*protection.*\sorder.*/i
+                    - /L2.*/i
+                - code: 'L3: Child assessment order LA accommodation'
+                  name: Child assessment order LA accommodation
+                  regex:
+                    - /.*child\sassessment.*/i
+                    - /^L3.*/i
+                - code: 'J1: Remanded to LA or youth detention'
+                  name: Remanded to LA or youth detention
+                  regex:
+                    - /.*remand.*/i
+                    - /.*youth\sdetention.*/i
+                    - /^J1.*/i
+                - code: 'J2: LA accommodation under PACE'
+                  name: LA accommodation under PACE
+                  regex:
+                    - /.*pace.*/i
+                    - /^J2.*/i
+                - code: 'J3: Youth rehabilitation order'
+                  name: Youth rehabilitation order
+                  regex:
+                    - /.*youth\srehabilit.*/i
+                    - /^J3.*/i
+                - code: 'V3: Short term breaks, episodes recorded'
+                  name: Short term breaks, episodes recorded
+                  regex:
+                    - /.*episodes\srecorded.*/i
+                    - /^V3.*/i
+                - code: 'V4: Short term breaks, agreements recorded'
+                  name: Short term breaks, agreements recorded
+                  regex:
+                    - /.*agreements\srecorded.*/i
+                    - /^V4.*/i
+        What is the permanence plan for this child?:
+            &permanence_plan
+                - code: a) Return to family
+                  name: Return to family
+                  regex:
+                    - /.*return.*/i
+                    - /.*a\).*/i
+                - code: b) Adoption
+                  name: Adoption
+                  regex:
+                    - /.*b\).*/i
+                - code: c) SGO/CAO
+                  name: SGO/CAO
+                  regex:
+                    - /.*sgo.*/i
+                    - /.*cao.*/i
+                    - /.*c\).*/i
+                - code: d) Supported living in the community
+                  name: Supported living in the community
+                  regex:
+                    - /.*supported\sliving.*/i
+                    - /.*d\).*/i
+                - code: e) Long-term residential placement
+                  name: Long-term residential placement
+                  regex:
+                    - /.*residential.*/i
+                    - /.*e\).*/i
+                - code: f) Long-term fostering
+                  name: Long-term fostering
+                  regex:
+                    - /.*fostering.*/i
+                    - /.*f\).*/i
+                - code: g) other
+                  name: other
+                  regex:
+                    - /.*other.*/i
+                    - /.*g\).*/i
+        Reason Ceased to be Looked After:
+            &ceased_lac
+                - code: 'a) E11: Adopted - application unopposed'
+                  name: Adopted - application unopposed
+                  regex:
+                    - /.*E11.*/i
+                    - /.*adopted.*\sunopposed.*/i
+                - code: 'b) E12: Adopted - consent dispensed'
+                  name: Adopted - consent dispensed
+                  regex:
+                    - /.*E12.*/i
+                    - /.*adopted.*\sconsent.*/i
+                - code: 'r) E15: Age assessment determined child was 18 or over' # Moving up for regex purposes
+                  name: Age assessment determined child was 18 or over
+                  regex:
+                    - /.*E15.*/i
+                    - /.*18.*\sover.*/i
+                    - /.*over.*\s18.*/i
+                - code: 'c) E2: Died'
+                  name: Died
+                  regex:
+                    - /.*E2.*/i
+                    - /.*died.*/i
+                - code: 'd) E3: Care taken by another LA'
+                  name: Care taken by another LA
+                  regex:
+                    - /.*E3.*/i
+                    - /.*another.*\sla.*/i
+                - code: 'f) E4B: Returned home to live with parents or relatives - not part of planning' #Moving up for regex purposes
+                  name: Returned home to live with parents or relatives - not part of planning
+                  regex:
+                    - /.*E4B.*/i
+                    - /.*return.*\shome.*\snot.*\splanning.*/i
+                    - /.*return.*\shome.*\sunplanned.*/i
+                - code: 'e) E4A: Returned home to live with parents or relatives - part of planning'
+                  name: Returned home to live with parents or relatives - part of planning
+                  regex:
+                    - /.*E4A.*/i
+                    - /.*return.*\shome.*\splanning.*/i
+                    - /.*return.*\shome.*\splanned.*/i
+                - code: 'g) E13: Parents, relatives or other with no parental responsibility'
+                  name: Parents, relatives or other with no parental responsibility
+                  regex:
+                    - /.*E13.*/i
+                - code: 'h) E41: Residence order granted'
+                  name: Residence order granted
+                  regex:
+                    - /.*E41.*/i
+                    - /.*residence.*\sorder.*/i
+                - code: 'i) E45: Special Guardianship Orders - former carer relative/friend'
+                  name: Special Guardianship Orders - former carer relative/friend
+                  regex:
+                    - /.*E45.*/i
+                - code: 'j) E46: Special Guardianship Orders - former carer other'
+                  name: Special Guardianship Orders - former carer other
+                  regex:
+                    - /.*E46.*/i
+                    - /.*E43.*/i # Including E43 from SSDA903 here
+                - code: 'k) E47: Special Guardianship Orders - relative/friend'
+                  name: Special Guardianship Orders - relative/friend
+                  regex:
+                    - /.*E47.*/i
+                - code: 'l) E48: Special Guardianship Orders - other'
+                  name: Special Guardianship Orders - other
+                  regex:
+                    - /.*E48.*/i
+                    - /.*E44.*/i # Including E44 from SSDA903 here
+                - code: 'm) E5: Moved into independent living - supported'
+                  name: Moved into independent living - supported
+                  regex:
+                    - /.*E5.*/i
+                - code: 'n) E6: Moved into independent living - no support'
+                  name: Moved into independent living - no support
+                  regex:
+                    - /.*E6.*/i
+                - code: 'o) E7: Transferred to residential care funded by adult social services'
+                  name: Transferred to residential care funded by adult social services
+                  regex:
+                    - /.*E7.*/i
+                - code: 'p) E9: Sentenced to custody'
+                  name: Sentenced to custody
+                  regex:
+                    - /.*E9.*/i
+                    - /.*custody.*/i
+                - code: 'q) E14: Accommodation on remand ended'
+                  name: Accommodation on remand ended
+                  regex:
+                    - /.*E14.*/i
+                    - /.*remand.*/i
+                - code: 's) E16: Child moved abroad'
+                  name: Child moved abroad
+                  regex:
+                    - /.*E16.*/i
+                    - /.*move.*\sabroad.*/i
+                - code: 't) E8: Care ceased for any other reason'
+                  name: Care ceased for any other reason
+                  regex:
+                    - /.*E8.*/i
+                    - /.*other.*\sreason.*/i
+                - code: 'u) X1: CodeError'
+                  name: CodeError
+                  regex:
+                    - /.*X1.*/i
+        Placement Type:
+            &placement_type
+                - code: 'c) U3: Foster placement - relative - not FFA' #Moving up for regex purposes
+                  name: Foster placement - relative - not FFA
+                  regex:
+                    - /.*foster.*relative.*\snot.*\sFFA.*/i
+                    - /.*U3.*/i
+                - code: 'f) U6: Foster placement - not FFA' #Moving up for regex purposes
+                  name: Foster placement - not FFA
+                  regex:
+                    - /.*foster.*\snot.*\sFFA.*/i
+                    - /.*U6.*/i
+                - code: 'a) U1: Foster placement - relatives - long term'
+                  name: Foster placement - relatives - long term
+                  regex:
+                    - /.*foster.*relative.*\slong\sterm.*/i
+                    - /.*U1.*/i
+                - code: 'd) U4: Foster placement - long term' #Moving up for regex purposes
+                  name: Foster placement - long term
+                  regex:
+                    - /.*foster.*\slong\sterm.*/i
+                    - /.*U4.*/i
+                - code: 'b) U2: Foster placement - relative - FFA'
+                  name: Foster placement - relative - FFA
+                  regex:
+                    - /.*foster.*relative.*\sFFA.*/i
+                    - /.*U2.*/i
+                - code: 'e) U5: Foster placement - FFA'
+                  name: Foster placement - FFA
+                  regex:
+                    - /.*foster.*\sFFA.*/i
+                    - /.*U5.*/i
+                - code: 'g) A3: Placed for adoption - consent - current foster'
+                  name: Placed for adoption - consent - current foster
+                  regex:
+                    - /.*adoption.*\sconsent.*\scurrent/i
+                    - /.*A3.*/i
+                - code: 'h) A4: Placed for adoption - consent - not foster'
+                  name: Placed for adoption - consent - not foster
+                  regex:
+                    - /.*adoption.*\sconsent.*\snot.*\sfoster.*/i
+                    - /.*A4.*/i
+                - code: 'j) A6: Placed for adoption - order - not foster' #Changing order for regex
+                  name: Placed for adoption - order - not foster
+                  regex:
+                    - /.*adoption.*\sorder.*\snot.*\sfoster.*/i
+                    - /.*A6.*/i
+                - code: 'i) A5: Placed for adoption - order - foster'
+                  name: Placed for adoption - order - foster
+                  regex:
+                    - /.*adoption.*\sorder.*\sfoster.*/i
+                    - /.*A5.*/i
+                - code: 'k) P1: Placed with parents'
+                  name: Placed with parents
+                  regex:
+                    - /.*place.*parents/i
+                    - /.*P1.*/i
+                - code: 'l) P2: Independent living'
+                  name: Independent living
+                  regex:
+                    - /.*P2.*/i
+                - code: 'm) P3: Residential employment'
+                  name: Residential employment
+                  regex:
+                    - /.*P3.*/i
+                - code: 'n) H5: Residential accommodation'
+                  name: Residential accommodation
+                  regex:
+                    - /.*Semi.*independent.*living.*/i
+                    - /.*H5.*/i
+                - code: "o) K1: Secure Children's Homes"
+                  name: "Secure Children's Homes"
+                  regex:
+                    - /.*K1.*/i
+                - code: "p) K2: Children's Homes"
+                  name: "Children's Homes"
+                  regex:
+                    - /.*children.*homes.*/i
+                    - /.*K2.*/i
+                - code: 'q) R1: Residential Care Home'
+                  name: Residential Care Home
+                  regex:
+                    - /.*R1.*/i
+                - code: 'r) R2: NHS/Health Trust'
+                  name: NHS/Health Trust
+                  regex:
+                    - /.*NHS.*/i
+                    - /.*Health.*/sTrust.*/i
+                    - /.*R2.*/i
+                - code: 's) R3: Family Centre or Mother and Baby Unit'
+                  name: Family Centre or Mother and Baby Unit
+                  regex:
+                    - /.*family.*/scentre.*/i
+                    - /.*mother\sand\sbaby.*/i
+                    - /.*R3.*/i
+                - code: 't) R5: Young Offender Institution'
+                  name: Young Offender Institution
+                  regex:
+                    - /.*offender.*/i
+                    - /.*R5.*/i
+                - code: 'u) S1: Residential school'
+                  name: Residential school
+                  regex:
+                    - /.*S1.*/i
+                - code: 'v) Z1: Other placements'
+                  name: Other placements
+                  regex:
+                    - /.*other.*place.*/
+                    - /.*Z1.*/i
+                - code: 'x) T1: Temporary placement - hospital'
+                  name: Temporary placement - hospital
+                  regex:
+                    - /.*temporary.*hospital.*/i
+                    - /.*T1.*/i
+                - code: 'z) T3: Temporary placement - carer holiday'
+                  name: Temporary placement - carer holiday
+                  regex:
+                    - /.*temporary.*carer.*\sholiday.*/i
+                    - /.*T3.*/i
+                - code: 'y) T2: Temporary placement - holiday'
+                  name: Temporary placement - holiday
+                  regex:
+                    - /.*temporary.*holiday.*/i
+                    - /.*T2.*/i
+                - code: 'zz) T4: Temporary placement - seven days or less'
+                  name: Temporary placement - seven days or less
+                  regex:
+                    - /.*temporary.*seven.*/i
+                    - /.*T4.*/i
+                - code: 'w) T0: Temporary placement'
+                  name: Temporary placement
+                  regex:
+                    - /.*temporary.*/i
+                    - /.*T0.*/i
+        Placement Provider:
+            &placement_provider
+                - code: 'a) PR0: Parents/Parental responsibility'
+                  name: Parents/Parental responsibility
+                  regex:
+                    - /.*PR0.*/i
+                    - /.*parent.*/i
+                - code: 'b) PR1: Own provision'
+                  name: Own provision
+                  regex:
+                    - /.*PR1.*/i
+                - code: 'c) PR2: Other LA provision'
+                  name: Other LA provision
+                  regex:
+                    - /.*PR2.*/i
+                - code: 'd) PR3: Other public provision'
+                  name: Other public provision
+                  regex:
+                    - /.*PR3.*/i
+                - code: 'e) PR4: Private provision'
+                  name: Private provision
+                  regex:
+                    - /.*PR4.*/i
+                - code: 'f) PR5: Voluntary/third sector'
+                  name: Voluntary/third sector
+                  regex:
+                    - /.*PR5.*/i
+        Placement Location:
+            &in_out
+                - code: a) In
+                  name: In
+                  regex:
+                    - /in.*/i
+                - code: b) Out
+                  name: Out
+                  regex:
+                    - /out.*/i
+        LA of Placement:
+            &la_placement
+                - code: NIR - Child placed in Northern Ireland
+                  name: Northern Ireland
+                  regex:
+                    - /NIR.*/i
+                - code: WAL - Child placed in Wales
+                  name: Wales
+                  regex:
+                    - /WAL.*/i
+                - code: SCO - Child placed in Scotland
+                  name: Scotland
+                  regex:
+                    - /SCO.*/i
+                - code: NUK - Child placed outside the UK
+                  name: outside the UK
+                  regex:
+                    - /NUK.*/i
+                - code: CON - Child placed in confidential placement
+                  name: confidential placement
+                  regex:
+                    - /.*confidential.*/i
+        Was the child offered a Return Interview after their last missing episode (Y/N)?: *bool
+        Did the child accept a Return Interview after their last missing episode (Y/N)?: *bool
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
