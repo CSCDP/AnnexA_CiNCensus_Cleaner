@@ -2,3 +2,4 @@ pandas>=0.25
 jupyter>=1.0.0
 jupyterlab>=1.2
 PyYAML==5.2
+openpyxl

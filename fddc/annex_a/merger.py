@@ -4,6 +4,8 @@ import logging
 import re
 import os
 from openpyxl import load_workbook
+
+from fddc.config import ConfigError
 from fddc.regex import parse_regex, substitute
 from zipfile import BadZipFile
 
@@ -413,7 +415,38 @@ def write_dataframes(dataframes, datasources, output_file, **args):
     writer.save()
 
 
+def parse_input_config(value, wrap_in_list=True):
+    """
+    Parses an value for `input_files`. Valid values are a single item, or a list of one of the following:
+      * A string - interpreted as the pattern
+      * An object - interpreted as the input_config object with root and include values
+
+      Returns a list with the input objects
+    """
+
+    if isinstance(value, str):
+        value = dict(include=value)
+
+    if isinstance(value, dict):
+        if "root" not in value:
+            value["root"] = os.getcwd()
+
+    if wrap_in_list:
+        if not isinstance(value, list):
+            value = [value]
+
+        value = [parse_input_config(v, False) for v in value]
+
+    return value
+
+
 def merge(config):
+    # Make sure we have input_files configured
+    if "input_files" not in config:
+        raise ConfigError("No 'input_files' configured.")
+
+    config["input_files"] = parse_input_config(config["input_files"])
+
     # First we scan the input files section for all inputs
     files = []
     for cfg_input in config["input_files"]:
@@ -445,7 +478,7 @@ def merge(config):
 
     # Write column report
     if config.get("column_report_filename") is not None:
-        column_report(valid_datasources, datasources_config_matched, cfg["column_report_filename"])
+        column_report(valid_datasources, datasources_config_matched, config["column_report_filename"])
 
     # Load dataframes
     valid_datasources = load_dataframes(valid_datasources, **config)
