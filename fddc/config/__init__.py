@@ -5,16 +5,19 @@ import os
 import yaml
 from string import Template
 
+logger = logging.getLogger('fddc.annex_a.config')
+
+
 class Config(dict):
 
     def __init__(self, *config_files, local_required=False, local_warn=False):
+
         super().__init__(
                 config_date = datetime.datetime.now().isoformat(),
-                username = os.getlogin()
+                username = os.getlogin(),
             )
 
-        self.__logger = logging.getLogger('Config')
-        
+
         self.load_config("./localconfig.yml", conditional=~local_required, warn=local_warn)
 
         for file in config_files:
@@ -38,14 +41,14 @@ class Config(dict):
         """
         if conditional and not os.path.isfile(filename):
             if warn:
-                self.__logger.warning('Missing optional file {}'.format(filename))
+                logger.warning('Missing optional file {}'.format(filename))
 
             return 
 
         with open(filename) as FILE:
             user_config = yaml.load(FILE, Loader=yaml.FullLoader)
             
-        self.__logger.info("Loading {} configuration values from '{}'.".format(len(user_config), filename))
+        logger.info("Loading {} configuration values from '{}'.".format(len(user_config), filename))
             
         environment_dict = {'os_environ_{}'.format(k): v for k,v in os.environ.items()}
         

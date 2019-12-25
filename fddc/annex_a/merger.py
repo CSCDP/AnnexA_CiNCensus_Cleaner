@@ -9,7 +9,7 @@ from fddc.config import ConfigError
 from fddc.regex import parse_regex, substitute
 from zipfile import BadZipFile
 
-logger = logging.getLogger('spreadsheetmerge.merger')
+logger = logging.getLogger('fddc.annex_a.merger')
 
 
 class RegexMatcher():
@@ -186,7 +186,9 @@ def match_datasources(data_sources, datasource_config):
                     break
 
         if "source_key" not in source:
-            logger.warn("No datasource identified for '{}' in '{}'".format(source["sheetname"], source["sourcename"]))
+            logger.warning("No datasource identified for '{}' in '{}'".format(source["sheetname"], source["sourcename"]))
+        else:
+            logger.debug("Matched datasource {source_key} for sheet {sheetname} in {filename}".format(**source))
 
     return data_sources
 
@@ -406,10 +408,10 @@ def write_dataframes(dataframes, datasources, output_file, **args):
     writer = pd.ExcelWriter(output_file, engine='xlsxwriter')
 
     for ds_key, ds in cfg_datasources.items():
-        logger.info("Writing {}".format(ds_key))
         df = dataframes.get(ds_key)
         if df is None:
             df = pd.DataFrame(columns=[x["name"] for x in ds["columns"]])
+        logger.info("Writing {} rows to {}".format(df.shape[0], ds_key))
         df.to_excel(writer, sheet_name=ds["name"], index=False)
 
     writer.save()
