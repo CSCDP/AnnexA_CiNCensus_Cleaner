@@ -1,3 +1,5 @@
+xlrd
+openpyxl
 pandas
 jupyter
 jupyterlab
