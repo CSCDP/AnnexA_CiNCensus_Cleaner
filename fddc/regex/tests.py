@@ -1,6 +1,7 @@
 import unittest
-from regex import parse_regex, substitute
+from fddc.regex import parse_regex, substitute
 import re
+
 
 class TestRegex(unittest.TestCase):
 
@@ -19,7 +20,7 @@ class TestRegex(unittest.TestCase):
     def test_case_insensitive_multiline(self):
         p = parse_regex('/test\s+me/im')
         self.assertEqual(p, re.compile("test\s+me", re.I | re.M), "Should have I and M modifier")
-    
+
         test_string = "test\nme"
         self.assertIsNotNone(p.match(test_string), "Should match test string {}".format(test_string))
 
@@ -37,7 +38,8 @@ class TestSubstitute(unittest.TestCase):
 
     def test_simple(self):
         value = substitute(r'/t(es)t/-\1-/', "test", "default")
-        self.assertEqual(value, "-es-" , "Shold only retain 'es'")
-        
+        self.assertEqual(value, "-es-", "Shold only retain 'es'")
+
+
 if __name__ == '__main__':
     unittest.main()
