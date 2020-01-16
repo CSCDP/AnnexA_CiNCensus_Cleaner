@@ -127,10 +127,10 @@ def find_worksheets_xls(filename, **sourceinfo):
             row_length = 0
             for col in row:
                 if col.value is not None and len(col.value.strip()) > 0:
-                    header_row_index = ix
+                    header_row_index = ix + 1
                     row_length += 1
             if row_length > 3:
-                header_values = [col for col in row]
+                header_values = [col.value for col in row]
                 break
 
         data_sources.append({
