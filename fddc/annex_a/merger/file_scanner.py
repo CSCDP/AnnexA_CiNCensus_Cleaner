@@ -1,12 +1,24 @@
 import glob
 import os
 import logging
+from typing import List, Sequence
+
+from dataclasses import dataclass
+
 from fddc.regex import substitute
 
 logger = logging.getLogger('fddc.annex_a.merger.file_scanner')
 
 
-def find_input_files(root, include, sort_keys=None, **args):
+@dataclass
+class FileSource:
+    filename: str
+    sourcename: str
+    sort_key: str
+    root: str
+
+
+def find_input_files(root: str, include: str, sort_keys: Sequence[str] = None) -> List[FileSource]:
     """
     Processes a single item in the input config.
     """
@@ -33,16 +45,5 @@ def find_input_files(root, include, sort_keys=None, **args):
             for sk in sort_keys:
                 sort_key = substitute(sk, sort_key, sort_key)
 
-        output.append({
-            "filename": filename,
-            "sourcename": sourcename,
-            "sort_key": sort_key,
-            "sort_keys": sort_keys,
-            "root": root,
-            "input_cfg": {
-                "root": root,
-                "include": include,
-                **args
-            }})
-
+        output.append(FileSource(filename=filename, sourcename=sourcename, sort_key=sort_key, root=root))
     return output

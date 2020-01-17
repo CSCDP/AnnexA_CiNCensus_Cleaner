@@ -2,13 +2,13 @@ from fddc.regex import parse_regex
 
 
 class Matcher:
-    def __init__(self, type, **args):
+    def __init__(self, type: str, **args):
         if type == "regex":
             self.__matcher = RegexMatcher(**args)
         else:
             raise Exception("Unknown matcher type: {}".format(type))
 
-    def match(self, string):
+    def match(self, string: str) -> bool:
         return self.__matcher.match(string)
 
 
