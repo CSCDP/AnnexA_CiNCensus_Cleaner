@@ -134,6 +134,10 @@ def clean(input_file, output_file, matching_report_file, data_config, **args):
 
     for r in dataframe_to_rows(references, index=False, header=True):
         ws_ref.append(r)
+    
     # Save both reports
     wb.save(matching_report_file)
     writer_clean.save()
+    
+    # Done
+    print('Done!')
