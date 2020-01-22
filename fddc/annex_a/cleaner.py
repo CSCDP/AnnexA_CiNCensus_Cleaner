@@ -79,7 +79,9 @@ def clean(input_file, output_file, matching_report_file, data_config, **args):
         ws['A1'] = 'column'
         ws['B1'] = 'former_value'
         ws['C1'] = 'new_value'
-        
+        for cell in ws['A'] + ws[1]:
+            cell.style = 'Pandas'
+            
         # Run through config criteria for that sheet
         for col in settings:
             if df[df[col].notnull()].shape[0] > 0: # Only look at non-empty columns
@@ -132,6 +134,10 @@ def clean(input_file, output_file, matching_report_file, data_config, **args):
 
     for r in dataframe_to_rows(references, index=False, header=True):
         ws_ref.append(r)
+    
     # Save both reports
     wb.save(matching_report_file)
     writer_clean.save()
+    
+    # Done
+    print('Done!')
