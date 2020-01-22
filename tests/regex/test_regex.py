@@ -38,7 +38,7 @@ class TestSubstitute(unittest.TestCase):
 
     def test_simple(self):
         value = substitute(r'/t(es)t/-\1-/', "test", "default")
-        self.assertEqual(value, "-es-", "Should only retain 'es'")
+        self.assertEqual(value, "-es-", "Shold only retain 'es'")
 
 
 if __name__ == '__main__':

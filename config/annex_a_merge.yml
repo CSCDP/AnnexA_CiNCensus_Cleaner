@@ -1,6 +1,7 @@
 datasources:
     list1:
         name: List 1
+        regex: /list.*1$$/i
         columns: 
             - name: Child Unique ID
               unique: true
@@ -18,7 +19,8 @@ datasources:
 
     list2:
         name: List 2
-        columns: 
+        regex: /list.*2/i
+        columns:
             - name: Child Unique ID
               unique: true
             - name: Gender
@@ -36,7 +38,8 @@ datasources:
 
     list3:
         name: List 3
-        columns: 
+        regex: /list.*3/i
+        columns:
             - name: Child Unique ID
               unique: true
             - name: Gender
@@ -57,7 +60,8 @@ datasources:
     
     list4:
         name: List 4
-        columns: 
+        regex: /list.*4/i
+        columns:
             - name: Child Unique ID
               unique: true
             - name: Gender
@@ -79,7 +83,8 @@ datasources:
 
     list5:
         name: List 5
-        columns: 
+        regex: /list.*5/i
+        columns:
             - name: Child Unique ID
               unique: true
             - name: Gender
@@ -102,7 +107,8 @@ datasources:
 
     list6:
         name: List 6
-        columns: 
+        regex: /list.*6/i
+        columns:
             - name: Child Unique ID
               unique: true
             - name: Gender
@@ -126,8 +132,9 @@ datasources:
             - name: Allocated Worker
 
     list7:
-        name: List 7
-        columns: 
+      name: List 7
+      regex: /list.*7/i
+      columns:
             - name: Child Unique ID
               unique: true
             - name: Gender
@@ -156,7 +163,8 @@ datasources:
 
     list8:
         name: List 8
-        columns: 
+        regex: /list.*8/i
+        columns:
             - name: Child Unique ID
               unique: true
             - name: Gender
@@ -208,7 +216,8 @@ datasources:
 
     list9:
         name: List 9
-        columns: 
+        regex: /list.*9/i
+        columns:
             - name: Child Unique ID
               unique: true
             - name: Gender
@@ -228,7 +237,8 @@ datasources:
 
     list10:
         name: List 10
-        columns: 
+        regex: /list.*10/i
+        columns:
             - name: Child Unique ID
               unique: true
             - name: Family identifier
@@ -259,7 +269,8 @@ datasources:
 
     list11:
         name: List 11
-        columns: 
+        regex: /list.*11/i
+        columns:
             - name: Individual adopter identifier
               unique: true
             - name: Family identifier

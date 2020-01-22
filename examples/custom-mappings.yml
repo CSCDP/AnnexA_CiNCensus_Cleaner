@@ -1,0 +1,15 @@
+input_files:
+
+  - root: "${os_environ_input_dir}/annex_a"
+    include: "**/*.xlsx"
+    datasources:
+      list5:
+          columns:
+              - name: Strategy discussion initiating Section 47 Enquiry Start Date
+                regex: /Section 47 Enquiry Start Date/i
+              - name: Was an Initial Child Protection Conference deemed unnecessary?
+                regex: /Initial Child Protection Conference Not Required.*/i
+      list8:
+          columns:
+              - name: What is the permanence plan for this child?
+                regex: /Plan for Child to be Reunified with Their Family.*/i
