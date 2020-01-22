@@ -1,26 +1,45 @@
 import copy
 import re
 
-def init_datasource_config(datasource_config):
-    """
-    Reads all configured datasources from the configuration
-    and initialises them with patterns.
+from dataclasses import dataclass, InitVar
+from typing import List, Dict, Union
 
-    Returns a new object.
-    """
-    datasource_config = copy.deepcopy(datasource_config)
-    for key, cfg_source in datasource_config.items():
-        # We generate a default regex to use if no specific pattern is set
-        name = cfg_source["name"]
-        name = re.sub(r'\s+', "\\\s+", name)
+from fddc.annex_a.merger.matcher import MatcherConfig, RegexMatcherConfig
 
-        # If regex is not set, use our default one instead
-        pattern = cfg_source.get("regex", "/.*{}.*/i".format(name))
+
+@dataclass
+class ColumnConfig:
+    name: str
+    unique: bool = False
+    type: str = None
+    matchers: List[MatcherConfig] = None
+    regex: InitVar[Union[str, List[str]]] = None
+
+    def __post_init__(self, regex):
+
+        # Create default regex based on name
+        if regex is None:
+            name = re.sub(r'\s+', r'\\s+', self.name)
+            regex = ["/.*{}.*/i".format(name)]
+
+        # We want a list
+        if isinstance(regex, str):
+            regex = [regex]
 
         # Set matchers object
-        cfg_source["matchers"] = [{"type": "regex", "pattern": pattern}]
+        self.matchers = [RegexMatcherConfig(type='regex', pattern=p) for p in regex]
 
-    return datasource_config
+
+@dataclass
+class SheetConfig:
+    name: str
+    columns: List[ColumnConfig] = None
+    regex: str = None
+
+
+@dataclass
+class DataSourceConfig:
+    data_source: Dict[str, SheetConfig]
 
 
 def init_all_column_config(datasources):

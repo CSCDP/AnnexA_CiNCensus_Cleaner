@@ -11,21 +11,27 @@ logger = logging.getLogger('fddc.annex_a.merger.file_scanner')
 
 
 @dataclass
+class ScanSource:
+    include: str
+    root: str = "."
+    sort_keys: Sequence[str] = None
+
+@dataclass
 class FileSource:
     filename: str
-    sourcename: str
-    sort_key: str
-    root: str
+    sourcename: str = None
+    sort_key: str = None
+    root: str = None
 
 
-def find_input_files(root: str, include: str, sort_keys: Sequence[str] = None) -> List[FileSource]:
+def find_input_files(source: ScanSource) -> List[FileSource]:
     """
     Processes a single item in the input config.
     """
 
     # Build complete globbing path based on root and include pattern
-    root = os.path.abspath(root)
-    file_glob = os.path.join(root, include)
+    root = os.path.abspath(source.root)
+    file_glob = os.path.join(root, source.include)
 
     logger.debug("Resolving files using {}".format(file_glob))
 
@@ -38,11 +44,9 @@ def find_input_files(root: str, include: str, sort_keys: Sequence[str] = None) -
         sourcename = os.path.relpath(filename, root)
 
         # Build sort-keys
-        if sort_keys is None:
-            sort_key = sourcename
-        else:
-            sort_key = sourcename
-            for sk in sort_keys:
+        sort_key = sourcename
+        if source.sort_keys is not None:
+            for sk in source.sort_keys:
                 sort_key = substitute(sk, sort_key, sort_key)
 
         output.append(FileSource(filename=filename, sourcename=sourcename, sort_key=sort_key, root=root))

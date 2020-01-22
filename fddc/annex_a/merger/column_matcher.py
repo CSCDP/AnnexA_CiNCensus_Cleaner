@@ -1,5 +1,4 @@
 import copy
-from fddc.annex_a.merger.matcher import Matcher
 
 
 def match_columns(data_sources):
@@ -15,7 +14,7 @@ def match_columns(data_sources):
             col = copy.deepcopy(col)
             columns.append(col)
             for matcher in col["matchers"]:
-                matcher = Matcher(**matcher)
+                # matcher = Matcher(**matcher)
                 for header in ds_headers:
                     if matcher.match(header["name"]):
                         ds_headers.remove(header)
