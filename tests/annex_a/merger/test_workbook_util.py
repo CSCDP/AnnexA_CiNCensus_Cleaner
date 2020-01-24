@@ -36,4 +36,4 @@ class TestWorkbookUtil(unittest.TestCase):
                                 'Contact Source'
                             ]
         expected_headers = [WorkSheetHeaderItem(value, ix) for ix, value in enumerate(expected_headers)]
-        self.assertEqual(expected_headers, list_1.header_values)
+        self.assertEqual(expected_headers, list_1.headers)

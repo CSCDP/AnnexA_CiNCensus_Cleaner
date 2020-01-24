@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import List, Any
 from xlrd import open_workbook
 
-from fddc.annex_a.merger import FileSource
+from fddc.annex_a.merger.file_scanner import FileSource
 
 logger = logging.getLogger('fddc.annex_a.merger.workbook_util')
 
@@ -18,7 +18,7 @@ class WorkSheetHeaderItem:
 class WorkSheetDetail(FileSource):
     sheetname: str = None
     header_row_index: int = None
-    header_values: List[WorkSheetHeaderItem] = None
+    headers: List[WorkSheetHeaderItem] = None
 
 
 def find_worksheets(source: FileSource) -> WorkSheetDetail:
@@ -46,7 +46,7 @@ def find_worksheets(source: FileSource) -> WorkSheetDetail:
         source_info = WorkSheetDetail(source)
         source_info.sheetname = sheet_name
         source_info.header_row_index = header_row_index
-        source_info.header_values = header_values
+        source_info.headers = header_values
 
         data_sources.append(source_info)
 

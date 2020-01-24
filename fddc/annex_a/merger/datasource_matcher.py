@@ -1,6 +1,6 @@
 import logging
 from dataclasses import dataclass, asdict
-from typing import List
+from typing import List, Tuple
 
 from fddc.annex_a.merger.workbook_util import WorkSheetDetail
 from fddc.annex_a.merger.configuration import SourceConfig
@@ -22,7 +22,8 @@ def _does_sheet_match(source_config: SourceConfig, sheetname: str):
     return False
 
 
-def match_data_sources(sheet_detail_list: List[WorkSheetDetail], source_configuration_list: List[SourceConfig]):
+def match_data_sources(sheet_detail_list: List[WorkSheetDetail],
+                       source_configuration_list: List[SourceConfig]) -> Tuple[List[MatchedSheet], List[WorkSheetDetail]]:
     """
         Checks each entry in file_sources to see if it is matched by any of the data_sources.
 

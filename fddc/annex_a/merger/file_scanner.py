@@ -16,6 +16,7 @@ class ScanSource:
     root: str = "."
     sort_keys: Sequence[str] = None
 
+
 @dataclass
 class FileSource:
     filename: str
