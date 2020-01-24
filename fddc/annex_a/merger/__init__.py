@@ -1,6 +1,7 @@
 import logging
 from typing import List
 
+from fddc.annex_a.merger.configuration import SourceConfig
 from fddc.annex_a.merger.file_scanner import FileSource, ScanSource
 from fddc.annex_a.merger.workbook_util import WorkSheetDetail
 from . import column_matcher
@@ -9,12 +10,11 @@ from . import datasource_matcher
 from . import file_scanner
 from . import merge_util
 from . import workbook_util
-from .configuration import DataSourceConfig
 
 logger = logging.getLogger('fddc.annex_a.merger')
 
 
-def merge(input_files: List[ScanSource], data_sources: List[DataSourceConfig]):
+def merge(input_files: List[ScanSource], data_sources: List[SourceConfig]):
     # First we scan the input files section for all inputs
     files = []  # type: List[FileSource]
     for scan_source in input_files:

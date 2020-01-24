@@ -2,7 +2,7 @@ import copy
 import re
 
 from dataclasses import dataclass, InitVar
-from typing import List, Dict, Union
+from typing import List, Union
 
 from fddc.annex_a.merger.matcher import MatcherConfig, RegexMatcherConfig
 
@@ -34,7 +34,7 @@ class ColumnConfig:
 
 
 @dataclass
-class SheetConfig:
+class SourceConfig:
     name: str
     columns: List[ColumnConfig] = None
     matchers: List[MatcherConfig] = None
@@ -43,11 +43,6 @@ class SheetConfig:
     def __post_init__(self, regex):
         # Set matchers object
         self.matchers = _parse_regex(regex, self.name)
-
-
-@dataclass
-class DataSourceConfig:
-    data_source: Dict[str, SheetConfig]
 
 
 def init_all_column_config(datasources):

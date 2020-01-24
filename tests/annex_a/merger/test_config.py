@@ -1,6 +1,6 @@
 import unittest
 from dacite import from_dict
-from fddc.annex_a.merger.configuration import ColumnConfig, RegexMatcherConfig, DataSourceConfig, SheetConfig
+from fddc.annex_a.merger.configuration import ColumnConfig, RegexMatcherConfig, SourceConfig
 
 
 class TestConfiguration(unittest.TestCase):
@@ -25,12 +25,3 @@ class TestConfiguration(unittest.TestCase):
         self.assertFalse(cfg.matchers[0].match('2'))
         self.assertTrue(cfg.matchers[1].match('2'))
 
-    def test_data_source_config(self):
-        cfg = from_dict(data_class=DataSourceConfig, data={
-            "data_source": {
-                "test": {
-                    "name": "Test 1"
-                }
-            }
-        })
-        self.assertEquals(cfg.data_source.get("test"), SheetConfig(name="Test 1"))

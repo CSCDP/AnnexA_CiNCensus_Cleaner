@@ -1,46 +1,45 @@
 import logging
 from dataclasses import dataclass, asdict
-from typing import List, Dict
+from typing import List
 
 from fddc.annex_a.merger.workbook_util import WorkSheetDetail
-from fddc.annex_a.merger.configuration import SheetConfig
+from fddc.annex_a.merger.configuration import SourceConfig
 
-logger = logging.getLogger('fddc.annex_a.merger.configuration')
+logger = logging.getLogger('fddc.annex_a.merger.datasource_matcher')
 
 
 @dataclass
-class MatchedSource:
-    key: str
-    sheet: WorkSheetDetail
-    source: SheetConfig
+class MatchedSheet:
+    sheet_detail: WorkSheetDetail
+    source_config: SourceConfig
 
 
-def _does_sheet_match(config: SheetConfig, sheetname: str):
-    """ Returns True if sheetname is matched by any of the matchers in config """
-    for matcher in config.matchers:
+def _does_sheet_match(source_config: SourceConfig, sheetname: str):
+    """ Returns True if sheetname is matched by any of the matchers in source_config """
+    for matcher in source_config.matchers:
         if matcher.match(sheetname):
             return True
     return False
 
 
-def match_data_sources(file_sources: List[WorkSheetDetail], data_sources: Dict[str, SheetConfig]):
+def match_data_sources(sheet_detail_list: List[WorkSheetDetail], source_configuration_list: List[SourceConfig]):
     """
         Checks each entry in file_sources to see if it is matched by any of the data_sources.
 
         Returns the matched entries combined with the matching source.
     """
-    matched_sources = []  # type: List[MatchedSource]
-    unmatched_sources = [*file_sources]  # type: List[WorkSheetDetail]
+    matched_sheets = []  # type: List[MatchedSheet]
+    unmatched_sheets = list(sheet_detail_list)  # type: List[WorkSheetDetail]
 
-    for source in file_sources:
-        for key, config in data_sources.items():
-            if _does_sheet_match(config, source.sheetname):
-                matched_sources.append(MatchedSource(key=key, source=source, sheet=source))
-                unmatched_sources.remove(source)
+    for sheet_detail in sheet_detail_list:
+        for source_configuration in source_configuration_list:
+            if _does_sheet_match(source_configuration, sheet_detail.sheetname):
+                matched_sheets.append(MatchedSheet(source_config=source_configuration, sheet_detail=sheet_detail))
+                unmatched_sheets.remove(sheet_detail)
                 break
 
-    for source in unmatched_sources:
+    for sheet in unmatched_sheets:
         logger.warning(
-            "No datasource identified for '{sheetname}' in '{filename}'".format(**asdict(source)))
+            "No datasource identified for '{sheetname}' in '{filename}'".format(**asdict(sheet)))
 
-    return file_sources, unmatched_sources
+    return matched_sheets, unmatched_sheets
