@@ -17,7 +17,7 @@ class WorkSheetHeaderItem:
 @dataclass
 class WorkSheetDetail(FileSource):
     sheetname: str = None
-    header_row_index: int = None
+    header_row_index: int = 1
     headers: List[WorkSheetHeaderItem] = None
 
 

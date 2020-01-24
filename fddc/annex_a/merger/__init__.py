@@ -44,7 +44,7 @@ def merge(input_files: List[ScanSource],
         column_matcher.column_report(sheet_with_columns, unmatched_sheets, column_report_filename)
 
     # Load dataframes
-    valid_datasources = merge_util.load_dataframes(valid_datasources, **config)
+    all_data = merge_util.load_dataframes(sheet_with_columns, **config)
 
     # Merge sources into single view
     valid_datasources = merge_util.merge_datasources(valid_datasources, **config)
