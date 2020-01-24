@@ -30,16 +30,10 @@ def merge(input_files: List[ScanSource], data_sources: List[SourceConfig]):
     logger.info("Found {} candidate data sources".format(len(file_sources)))
 
     # Match datasources based on configuration
-    datasources_config_matched = datasource_matcher.match_data_sources(file_sources, data_sources)
-
-    # Limit to only matched datasources
-    valid_datasources = [d for d in datasources_config_matched if "source_key" in d]
-
-    # Initialise column configuration for all valid datasources
-    valid_datasources = configuration.init_all_column_config(valid_datasources)
+    matched_sheets, unmatched_sheets = datasource_matcher.match_data_sources(file_sources, data_sources)
 
     # Match headers to column configuration
-    valid_datasources = column_matcher.match_columns(valid_datasources)
+    valid_datasources = column_matcher.match_columns(matched_sheets)
 
     # Write column report
     if config.get("column_report_filename") is not None:

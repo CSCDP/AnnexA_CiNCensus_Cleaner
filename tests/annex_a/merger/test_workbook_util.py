@@ -2,7 +2,7 @@ import unittest
 import os
 from typing import List
 
-from fddc.annex_a.merger.workbook_util import WorkSheetDetail
+from fddc.annex_a.merger.workbook_util import WorkSheetDetail, WorkSheetHeaderItem
 from tests.configuration import PROJECT_ROOT
 from fddc.annex_a.merger import workbook_util, FileSource
 
@@ -25,11 +25,15 @@ class TestWorkbookUtil(unittest.TestCase):
 
         list_1 = worksheets_by_name['List_1']
         self.assertEqual(2, list_1.header_row_index)
-        self.assertEqual(['Child Unique ID',
-                          'Gender',
-                          'Ethnicity',
-                          'Date of Birth',
-                          'Age of Child (Years)',
-                          'Date of Contact',
-                          'Contact Source'],
-                         list_1.header_values)
+
+        expected_headers = [
+                                'Child Unique ID',
+                                'Gender',
+                                'Ethnicity',
+                                'Date of Birth',
+                                'Age of Child (Years)',
+                                'Date of Contact',
+                                'Contact Source'
+                            ]
+        expected_headers = [WorkSheetHeaderItem(value, ix) for ix, value in enumerate(expected_headers)]
+        self.assertEqual(expected_headers, list_1.header_values)

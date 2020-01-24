@@ -1,6 +1,6 @@
 import logging
 from dataclasses import dataclass
-from typing import List
+from typing import List, Any
 from xlrd import open_workbook
 
 from fddc.annex_a.merger import FileSource
@@ -9,10 +9,16 @@ logger = logging.getLogger('fddc.annex_a.merger.workbook_util')
 
 
 @dataclass
+class WorkSheetHeaderItem:
+    value: Any
+    column_index: int
+
+
+@dataclass
 class WorkSheetDetail(FileSource):
     sheetname: str = None
     header_row_index: int = None
-    header_values: List = None
+    header_values: List[WorkSheetHeaderItem] = None
 
 
 def find_worksheets(source: FileSource) -> WorkSheetDetail:
@@ -26,7 +32,7 @@ def find_worksheets(source: FileSource) -> WorkSheetDetail:
 
         # We search for first row with more than 3 non-null values
         header_row_index = None
-        header_values = []
+        header_values = []  # type: List[WorkSheetHeaderItem]
         for ix, row in enumerate(sheet.get_rows()):
             row_length = 0
             for col in row:
@@ -34,7 +40,7 @@ def find_worksheets(source: FileSource) -> WorkSheetDetail:
                     header_row_index = ix + 1
                     row_length += 1
             if row_length > 3:
-                header_values = [col.value for col in row]
+                header_values = [WorkSheetHeaderItem(value=col.value, column_index=ix) for ix, col in enumerate(row)]
                 break
 
         source_info = WorkSheetDetail(source)

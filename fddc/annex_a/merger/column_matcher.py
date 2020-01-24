@@ -1,30 +1,55 @@
 import copy
+from dataclasses import dataclass
+from typing import List, Union
+
+from fddc.annex_a.merger.configuration import ColumnConfig
+from fddc.annex_a.merger.datasource_matcher import MatchedSheet
+from fddc.annex_a.merger.matcher import MatcherConfig
+from fddc.annex_a.merger.workbook_util import WorkSheetHeaderItem
 
 
-def match_columns(data_sources):
-    data_sources = copy.deepcopy(data_sources)
-    for ds in data_sources:
+@dataclass
+class MatchedColumn:
+    column: ColumnConfig
+    header: WorkSheetHeaderItem
 
-        # Build list of available headers
-        ds_headers = [{"name": x, "pos": ix} for ix, x in enumerate(ds["header_values"]) if x is not None]
 
-        # Loop over each configured column and try to identify candidate column
-        columns = []
-        for col in ds["column_config"]:
-            col = copy.deepcopy(col)
-            columns.append(col)
-            for matcher in col["matchers"]:
-                # matcher = Matcher(**matcher)
-                for header in ds_headers:
-                    if matcher.match(header["name"]):
-                        ds_headers.remove(header)
-                        col["header"] = header
-                        break
+@dataclass
+class SheetWithHeaders:
+    sheet: MatchedSheet
+    columns: List[MatchedColumn]
+    unmatched_columns: List[ColumnConfig]
 
-        ds["column_spec"] = columns
-        ds["headers_unmatched"] = ds_headers
 
-    return data_sources
+def _match_header(header_list: List[WorkSheetHeaderItem], matcher_list: List[MatcherConfig]) -> WorkSheetHeaderItem:
+    for matcher in matcher_list:
+        for header in header_list:
+            if matcher.match(header.value):
+                return header
+
+
+def match_columns(matched_sheet: Union[MatchedSheet, List[MatchedSheet]]) -> List[SheetWithHeaders]:
+    # First we check if we were passed a list, in which case we iterate
+    if not isinstance(matched_sheet, MatchedSheet):
+        sheet_list = []  # type: List[SheetWithHeaders]
+        for m in matched_sheet:
+            sheet_list += match_columns(m)
+        return sheet_list
+
+    # Otherwise we're working on a single sheet
+    matched_columns = []  # type: List[MatchedColumn]
+    unmatched_columns = []  # type: List[ColumnConfig]
+
+    # Loop over each configured column and try to identify candidate column
+    for column_config in matched_sheet.source_config.columns:
+        matched_header = _match_header(matched_sheet.sheet_detail.header_values,
+                                       column_config.matchers)
+        if matched_header is None:
+            unmatched_columns.append(column_config)
+        else:
+            matched_columns.append(MatchedColumn(header=matched_header, column=column_config))
+
+    return [SheetWithHeaders(sheet=matched_sheet, columns=matched_columns, unmatched_columns=unmatched_columns)]
 
 
 def column_report(data_sources, all_data_sources, filename=None):
