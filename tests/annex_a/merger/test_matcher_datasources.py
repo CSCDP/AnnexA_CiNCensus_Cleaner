@@ -1,8 +1,8 @@
 import unittest
 
-from fddc.annex_a.merger import WorkSheetDetail
-from fddc.annex_a.merger.datasource_matcher import match_data_sources, MatchedSheet
+from fddc.annex_a.merger.matcher import match_data_sources, MatchedSheet
 from fddc.annex_a.merger.configuration import SourceConfig
+from fddc.annex_a.merger.workbook_util import WorkSheetDetail
 
 
 class TestMatcher(unittest.TestCase):
@@ -25,6 +25,6 @@ class TestMatcher(unittest.TestCase):
         ])
 
         self.assertEqual(logs.output,
-                         ["WARNING:fddc.annex_a.merger.datasource_matcher:No datasource identified for " +
+                         ["WARNING:fddc.annex_a.merger.matcher:No datasource identified for " +
                           "'List 2' in 'File 2'"]
                          )

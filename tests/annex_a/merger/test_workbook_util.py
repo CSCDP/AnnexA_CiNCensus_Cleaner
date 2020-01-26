@@ -1,21 +1,21 @@
 import unittest
 import os
 from typing import List
-
+from fddc.annex_a.merger.file_scanner import FileSource
 from fddc.annex_a.merger.workbook_util import WorkSheetDetail, WorkSheetHeaderItem
 from tests.configuration import PROJECT_ROOT
-from fddc.annex_a.merger import workbook_util, FileSource
+from fddc.annex_a.merger import workbook_util
 
 
 class TestWorkbookUtil(unittest.TestCase):
 
     def test_find_worksheets_xlsx(self):
-        source = FileSource(filename=os.path.join(PROJECT_ROOT, "examples/example-01.xlsx"))
+        source = FileSource(filename=os.path.join(PROJECT_ROOT, "examples/example-B-2004.xlsx"))
         result = workbook_util.find_worksheets(source)
         self.assert_worksheets(result)
 
     def test_find_worksheets_xls(self):
-        source = FileSource(filename=os.path.join(PROJECT_ROOT, "examples/example-01.xls"))
+        source = FileSource(filename=os.path.join(PROJECT_ROOT, "examples/example-A-2005.xls"))
         result = workbook_util.find_worksheets(source)
         self.assert_worksheets(result)
 

@@ -2,9 +2,11 @@ import unittest
 from dacite import from_dict
 import yaml
 import numpy as np
-from fddc.annex_a.merger import column_matcher
-from fddc.annex_a.merger.datasource_matcher import MatchedSheet
-from fddc.annex_a.merger.matcher import RegexMatcherConfig
+
+import fddc.annex_a.merger.matcher_report
+from fddc.annex_a.merger import matcher
+from fddc.annex_a.merger.configuration import RegexMatcherConfig
+from fddc.annex_a.merger.matcher import MatchedSheet
 from fddc.annex_a.merger.workbook_util import WorkSheetHeaderItem
 
 
@@ -23,40 +25,39 @@ class TestConfiguration(unittest.TestCase):
             RegexMatcherConfig('/Header X/i')
         ]
 
-        result = column_matcher._match_header(header_list, matcher_list)
+        result = matcher._match_header(header_list, matcher_list)
         self.assertEqual(result, header_list[2])
 
     def test_match_single_column(self):
         sheet = self._get_test_sheet()
 
-        result_sheet_list = column_matcher.match_columns(sheet)
+        result_sheet_list = matcher.match_columns(sheet)
         self.assertEqual(len(result_sheet_list), 1)
         self.assert_sheet(result_sheet_list[0], sheet)
 
     def test_match_multiple_column(self):
         sheet = self._get_test_sheet()
 
-        result_sheet_list = column_matcher.match_columns([sheet])
+        result_sheet_list = matcher.match_columns([sheet])
         self.assertEqual(len(result_sheet_list), 1)
         self.assert_sheet(result_sheet_list[0], sheet)
 
     def test_column_report(self):
         sheet = self._get_test_sheet()
-        result_sheet_list = column_matcher.match_columns([sheet])
-        report = column_matcher.column_report(result_sheet_list)
+        result_sheet_list = matcher.match_columns([sheet])
+        report = fddc.annex_a.merger.matcher_report.column_report(result_sheet_list)
 
-        self.assertEqual(report.columns.tolist(), [
-             'root',
-             'filename',
-             'sort_key',
-             'sheetname',
-             'name',
-             'column_name',
-             'header_name',
-             'header_pos',
-             'potential_mismatch'])
+        self.assertEqual([
+            'filename',
+            'sort_key',
+            'header_starts',
+            'sheetname',
+            'table',
+            'column_name',
+            'header_name',
+        ],report.columns.tolist())
         self.assertEqual(report.column_name.tolist(), ['Header 1', 'Header X', 'Header Y', np.nan])
-        self.assertEqual(report.header_name.tolist(), ['Header 1', 'Header   X', np.nan, 'Header T'])
+        self.assertEqual(report.header_name.tolist(), ['Header 1', 'Header   X', '', 'Header T'])
 
     def assert_sheet(self, result_sheet, sheet):
         self.assertEqual(result_sheet.sheet, sheet)
@@ -84,4 +85,3 @@ sheet_detail:
           column_index: 2
         """
         return from_dict(data_class=MatchedSheet, data=yaml.safe_load(sheet))
-
