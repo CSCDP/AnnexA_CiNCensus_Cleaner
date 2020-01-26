@@ -1,3 +1,4 @@
+numpy
 openpyxl
 pandas>=0.25
 jupyter>=1.0.0
@@ -5,3 +6,4 @@ jupyterlab>=1.2
 PyYAML==5.2
 xlsxwriter>=1.2
 xlrd>=1.0.0
+dacite>=1.2.0
