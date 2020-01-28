@@ -39,14 +39,12 @@ class RegexMatcherConfig(MatcherConfig):
 def _parse_regex(regex: Union[str, List[str]], name: str):
     # Create default regex based on name
     if regex is None:
-        # Escape any characters that may cause issues for the expression
-        name = re.escape(name)
+        # Smart quotes and other non-word characters often cause problems - so we get rid off all punctuation
+        name = re.sub(r'[^\w\s]', r'.?', name)
 
         # We ignore spaces in the final matching
-        name = re.sub(r'(\\ )+', r'\\s+', name)
+        name = re.sub(r'(\s)+', r'\\s+', name)
 
-        # Smart quotes also often cause problems
-        name = re.sub(r'\\[\'\"]', r'.', name)
 
         # Create regex
         regex = [f"/.*{name}.*/i"]

@@ -1,5 +1,6 @@
 import unittest
 from fddc.annex_a.merger.configuration import ColumnConfig, RegexMatcherConfig, MatcherConfig
+from fddc.annex_a.merger import configuration
 
 
 class TestConfiguration(unittest.TestCase):
@@ -50,11 +51,12 @@ class TestConfiguration(unittest.TestCase):
         self.assertTrue(cfg.matchers[0].match(r'this \(and\) that'))
 
     def test_column_config_not_very_smart_quotes(self):
-        cfg = ColumnConfig(name='This "and" that')
-        self.assertTrue(cfg.matchers[0].match('This "and" that'))
-        self.assertTrue(cfg.matchers[0].match('This “and” that'))
+        matcher = configuration._parse_regex(None, 'This "and" that')[0]
+        self.assertEqual(r"/.*This\s+.?and.?\s+that.*/i", matcher.pattern)
+        self.assertTrue(matcher.match('This "and" that'))
+        self.assertTrue(matcher.match('This “and” that'))
 
-        cfg = ColumnConfig(name="I 'like' that!")
-        self.assertTrue(cfg.matchers[0].match("I 'like' that!"))
-        self.assertTrue(cfg.matchers[0].match("I ‘like’ that!"))
+        matcher = configuration._parse_regex(None, "I 'like' that!")[0]
+        self.assertTrue(matcher.match("I 'like' that!"))
+        self.assertTrue(matcher.match("I ‘like’ that!"))
 
