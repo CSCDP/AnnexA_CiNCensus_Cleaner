@@ -43,7 +43,7 @@ def _parse_regex(regex: Union[str, List[str]], name: str):
         name = re.escape(name)
 
         # We ignore spaces in the final matching
-        name = re.sub(r'(\\ )+', r'\s+', name)
+        name = re.sub(r'(\\ )+', r'\\s+', name)
 
         # Smart quotes also often cause problems
         name = re.sub(r'\\[\'\"]', r'.', name)
