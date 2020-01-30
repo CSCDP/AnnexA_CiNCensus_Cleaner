@@ -382,7 +382,7 @@ data_config:
                   name: Transferred to services of another local authority
                   regex:
                     - /.*transfer.*local.*author/i
-                    - /.*transfer.*la$/i
+                    - /.*transfer.*la/i
                     - /.*RC5.*/i
                 - code: RC6 - Transferred to adult social care services
                   name: Transferred to adult social care services
