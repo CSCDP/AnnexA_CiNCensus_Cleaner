@@ -55,7 +55,7 @@ class TestConfiguration(unittest.TestCase):
             'table',
             'column_name',
             'header_name',
-        ],report.columns.tolist())
+        ], report.columns.tolist())
         self.assertEqual(report.column_name.tolist(), ['Header 1', 'Header X', 'Header Y', np.nan])
         self.assertEqual(report.header_name.tolist(), ['Header 1', 'Header   X', '', 'Header T'])
 

@@ -59,4 +59,3 @@ class TestConfiguration(unittest.TestCase):
         matcher = configuration._parse_regex(None, "I 'like' that!")[0]
         self.assertTrue(matcher.match("I 'like' that!"))
         self.assertTrue(matcher.match("I ‘like’ that!"))
-

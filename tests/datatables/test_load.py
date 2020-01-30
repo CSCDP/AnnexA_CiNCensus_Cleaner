@@ -22,4 +22,3 @@ class TestLoad(unittest.TestCase):
 
         df = load.load_dataframe(file)
         self.assertIsNotNone(df)
-
