@@ -1,4 +1,4 @@
-name: Lint & Test
+name: All Tests
 
 on: [push]
 
@@ -34,4 +34,7 @@ jobs:
     - name: Test notebooks with treon
       run: |
         pip install treon
-        treon
+        treon 1*
+        treon 2*
+        treon 3*
+        treon docs
