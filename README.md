@@ -1,14 +1,14 @@
-# READ ME
+# Front Door Data Collaboration ![All Tests](https://github.com/SocialFinanceDigitalLabs/FrontDoorDataCollaboration/workflows/All%20Tests/badge.svg)
+
 
 Welcome!
 
-This code was originally developed by Celine Gross, Chris Owens ans Kaj Siebert at Social Finance as part of a grant funded programme to support Local Authorities to collaborate on data analysis. The programme was called the ‘Front Door Data Collaboration’. It was supported financially by the Christie Foundation and Nesta (through the ‘What Worls Centre for Children’s Social Care’) and the LAs whose staff guided its development were Bracknell Forest, West Berkshire, Southampton, and Surrey. It also benefitted from advice from the National Performance and Information Managers Group.
+This code was originally developed by [Celine Gross](https://github.com/Cece78), [Chris Owen](https://github.com/chowen94) and [Kaj Siebert](https://github.com/kws) at Social Finance as part of a grant funded programme to support Local Authorities to collaborate on data analysis. The programme was called the ‘Front Door Data Collaboration’. It was supported financially by the Christie Foundation and Nesta (through the ‘What Worls Centre for Children’s Social Care’) and the LAs whose staff guided its development were Bracknell Forest, West Berkshire, Southampton, and Surrey. It also benefitted from advice from the National Performance and Information Managers Group.
 
 We are happy to share this code hoping that other data analysts may benefit from a quick way to standardize Annex A to conduct more analysis. We will be sharing additional code to clean CIN Census and conduct analysis soon - stay tuned!
 
 You can find more info about Social Finance Digital Labs on our website: https://www.sfdl.org.uk/
 
-![All Tests](https://github.com/SocialFinanceDigitalLabs/FrontDoorDataCollaboration/workflows/All%20Tests/badge.svg)
 
 # How to run this programme
 
