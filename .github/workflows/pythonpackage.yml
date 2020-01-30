@@ -1,4 +1,4 @@
-name: Python package
+name: Lint & Test
 
 on: [push]
 
@@ -31,3 +31,7 @@ jobs:
       run: |
         pip install pytest
         pytest
+    - name: Test notebooks with treon
+      run: |
+        pip install treon
+        treon
