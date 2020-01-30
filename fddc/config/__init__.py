@@ -11,15 +11,17 @@ class Config(dict):
 
     def __init__(self, *config_files, local_required=False, local_warn=False):
 
-        super().__init__(
-            config_date=datetime.datetime.now().isoformat(),
-            username=os.getlogin(),
-        )
-
         self.load_config("./localconfig.yml", conditional=~local_required, warn=local_warn)
 
         for file in config_files:
             self.load_config(file, conditional=False)
+
+        self['config_date'] = datetime.datetime.now().isoformat()
+        try:
+            self['username'] = os.getlogin()
+        except OSError:
+            # This happens when tests are not run under a login shell, e.g. CI pipeline
+            pass
 
     def load_config(self, filename, conditional=False, warn=False):
         """
