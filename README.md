@@ -8,6 +8,7 @@ We are happy to share this code hoping that other data analysts may benefit from
 
 You can find more info about Social Finance Digital Labs on our website: https://www.sfdl.org.uk/
 
+![All Tests](https://github.com/SocialFinanceDigitalLabs/FrontDoorDataCollaboration/workflows/All%20Tests/badge.svg)
 
 # How to run this programme
 
