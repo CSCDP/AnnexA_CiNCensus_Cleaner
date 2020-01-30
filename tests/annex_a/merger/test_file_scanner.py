@@ -28,5 +28,5 @@ class TestFileScanner(unittest.TestCase):
             include=os.path.join(PROJECT_ROOT, "**/ex*.xls*"),
             sort_keys=[r'/.*?(\d+).*/\1/i'])
         )
-        filesource  = result[0]
-        self.assertEqual('2004', filesource.sort_key)
+        sort_keys  = {r.sort_key for r in result}
+        self.assertSetEqual({'2004', '2005'}, sort_keys)
