@@ -45,7 +45,6 @@ def _parse_regex(regex: Union[str, List[str]], name: str):
         # We ignore spaces in the final matching
         name = re.sub(r'(\s)+', r'\\s+', name)
 
-
         # Create regex
         regex = [f"/.*{name}.*/i"]
 

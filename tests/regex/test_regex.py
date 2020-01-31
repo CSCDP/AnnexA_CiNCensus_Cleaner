@@ -18,8 +18,8 @@ class TestRegex(unittest.TestCase):
         self.assertIsNotNone(p.match("Test"), "Should match test string 'Test'")
 
     def test_case_insensitive_multiline(self):
-        p = parse_regex('/test\s+me/im')
-        self.assertEqual(p, re.compile("test\s+me", re.I | re.M), "Should have I and M modifier")
+        p = parse_regex(r'/test\s+me/im')
+        self.assertEqual(p, re.compile(r"test\s+me", re.I | re.M), "Should have I and M modifier")
 
         test_string = "test\nme"
         self.assertIsNotNone(p.match(test_string), "Should match test string {}".format(test_string))

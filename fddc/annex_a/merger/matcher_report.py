@@ -80,7 +80,6 @@ def process_report(
     if isinstance(match_input, str) or isinstance(match_input, pd.DataFrame):
         match_input = parse_report(match_input)
 
-
     files_to_scan = set()
     columns_per_table = dict()
     mapping_dict: Dict[Tuple, List[MatchInput]] = dict()
@@ -239,14 +238,14 @@ def column_report(sheet_list: List[SheetWithHeaders],
 =IF
 (
     ISBLANK
-    ( 
+    (
         [[header_name]]
-    ), 
+    ),
     "",
     IFERROR
     (
         MATCH
-        ( 
+        (
             [[header_name]] , {{{}}} , 0
         )-1,
         "INVALID"
@@ -267,9 +266,9 @@ def column_report(sheet_list: List[SheetWithHeaders],
         ISBLANK
         (
             [[header_name]]
-        ), 
+        ),
         IF
-        ( 
+        (
             ISBLANK
             (
                 [[column_name]]
