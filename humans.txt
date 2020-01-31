@@ -1,0 +1,12 @@
+/* CORE TEAM */
+Data scientist: Celine Gross
+Contact: celine.gross@socialfinance.org.uk
+
+Data scientist: Chris Owen
+Contact: christopher.owen@socialfinance.org.uk
+
+Chief Technology Officer: Kaj Siebert
+Contact: kaj.siebert@socialfinance.org.uk
+
+/* CONTRIBUTORS */
+
