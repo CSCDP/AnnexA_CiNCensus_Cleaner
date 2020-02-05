@@ -2,7 +2,7 @@
 
 Welcome!
 
-This code was originally developed by Celine Gross, Chris Owens ans Kaj Siebert at Social Finance as part of a grant funded programme to support Local Authorities to collaborate on data analysis. The programme was called the ‘Front Door Data Collaboration’. It was supported financially by the Christie Foundation and Nesta (through the ‘What Worls Centre for Children’s Social Care’) and the LAs whose staff guided its development were Bracknell Forest, West Berkshire, Southampton, and Surrey. It also benefitted from advice from the National Performance and Information Managers Group.
+This code was originally developed by Celine Gross, Chris Owens and Kaj Siebert at Social Finance as part of a grant funded programme to support Local Authorities to collaborate on data analysis. The programme was called the ‘Front Door Data Collaboration’. It was supported financially by the Christie Foundation and Nesta (through the ‘What Works Centre for Children’s Social Care’). The LAs whose staff guided its development were Bracknell Forest, West Berkshire, Southampton, and Surrey. It also benefitted from advice from the National Performance and Information Managers Group.
 
 We are happy to share this code hoping that other data analysts may benefit from a quick way to standardize Annex A to conduct more analysis. We will be sharing additional code to clean CIN Census and conduct analysis soon - stay tuned!
 
