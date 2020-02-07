@@ -1,0 +1,40 @@
+cin_to_annexa_cols:
+    'LAchildID': 'Child Unique ID'
+    'GenderCurrent': 'Gender'
+    'AssessmentActualStartDate': 'Assessment start date'
+    'AssessmentAuthorisationDate': 'Continuous Assessment Date of Authorisation'
+    'CINclosureDate': 'CIN Closure Date'
+    'CINreferralDate': 'CIN Start Date'
+    'CPPendDate': 'Child Protection Plan End Date'
+    'CPPstartDate': 'Child Protection Plan Start Date'
+    'DateOfInitialCPC': 'Date of Initial Child Protection Conference'
+    'ICPCnotRequired': 'Was an Initial Child Protection Conference deemed unnecessary?'
+    'InitialCategoryOfAbuse': 'Initial Category of Abuse'
+    'LatestCategoryOfAbuse': 'Latest Category of Abuse'
+    'NumberOfPreviousCPP': 'Number of Previous Child Protection Plans'
+    'PersonBirthDate': 'Date of Birth'
+    'PrimaryNeedCode': 'Primary Need Code'
+    'ReasonForClosure': 'Reason for Closure'
+    'ReferralNFA': 'Referral NFA?'
+    'ReferralSource': 'Referral Source'
+    'S47ActualStartDate': 'Strategy discussion initiating Section 47 Enquiry Start Date'
+    
+annexa_to_cin_content:
+    Gender:
+        "a) Male": "1"
+        "b) Female": "2"
+        "c) Not stated/recorded": "0"
+        "d) Neither": "9"
+    Primary Need Code:
+        regex: '(N\d).*'
+    Reason for Closure:
+        regex: '(RC\d).*'   
+    "Referral NFA?":
+        "a) Yes": "1"
+        "b) No": "0"   
+    Ethnicity:
+        regex: '\w\)\s(\w{4}).*'
+    Contact Source:
+        regex: '[a-z]\)\s(\d{1,2}[A-Z]?):.*'
+    Referral Source:
+        regex: '[a-z]\)\s(\d{1,2}[A-Z]?):.*'
