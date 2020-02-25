@@ -20,6 +20,10 @@ def cleanfiles(input_folder, output_folder, config):
         for child in children:
             child = cleanchild(child, config)
         tree.write(os.path.join(output_folder, "cleaned-{}".format(filename)))
+        # Reload and rewrite xml so that we get proper identation after changing elements
+        parser = etree.XMLParser(remove_blank_text=True)
+        tree = etree.parse(os.path.join(output_folder, "cleaned-{}".format(filename)), parser)
+        tree.write(os.path.join(output_folder, "cleaned-{}".format(filename)), pretty_print=True)
     return 
 
 
@@ -295,21 +299,20 @@ def assessmentauthorisationdate(value, config):
     return value
 
 def factorsidentifiedatassessment(value, config):
-    for group in value:
-        if group.tag.endswith('AssessmentFactors'):
-            group = assessmentfactors(group, config['AssessmentFactors'])
-        else:
-            pass # if time, flag whatever else we find here
-    return value    
-
-def assessmentfactors(value, config):
-    if value.text is None:
-        node = value.getparent()
-        node.remove(value)
-    else:
-        value.text = value.text.strip().upper()
-        value.text = to_category(value.text, config['category'])
-    return value
+    regex = r"(20|21|\d+[A-Z])"
+    factors_list = []
+    assessmentfactors_list = value.findall("AssessmentFactors")
+    for assessmentfactor in assessmentfactors_list:
+        factors_list.append(assessmentfactor.text.strip())
+        value.remove(assessmentfactor)
+    factors_list = ','.join(factors_list)
+    # Use regex to get list of proper factors
+    factors = re.findall(regex, factors_list)
+    # Re-write AssessmentFactors in proper format in the xml - this is because several factors are on one line
+    for factor in factors:
+        add_factor = etree.SubElement(value, "AssessmentFactors")
+        add_factor.text = factor
+    return value     
 
 def section47(value, config):
     for group in value:
@@ -440,8 +443,6 @@ def cppreviewdate(value, config):
 def to_category(string, categories):
     for code in categories:
         if str(string).lower() == str(code['code']).lower():
-            return code['code']
-        elif str(code['code']).lower() in str(string).lower():
             return code['code']
         elif 'name' in code:
             if str(code['name']).lower() in str(string).lower():
