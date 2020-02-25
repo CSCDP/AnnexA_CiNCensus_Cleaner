@@ -101,6 +101,7 @@ def get_list(element, tag, NS):
     for value in values:
         value_list.append(value.text.strip())
     value_list = (',').join(value_list)
+    value_list = value_list.replace(' ', '')
     return value_list
 
 
