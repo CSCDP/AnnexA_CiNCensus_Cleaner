@@ -6,21 +6,26 @@ import re
 # We recommend including all of the events into the cin log: it is the default list included below in build_cinrecord
 # You can edit if you only need certain events
 
-def build_cinrecord(files, tag_list=['CINreferralDate', 'CINclosureDate', 'DateOfInitialCPC', 'AssessmentActualStartDate', 
+def build_cinrecord(files, include_cincensus, tag_list=['CINreferralDate', 'CINclosureDate', 'DateOfInitialCPC', 'AssessmentActualStartDate', 
               'AssessmentAuthorisationDate', 'S47ActualStartDate', 'CPPstartDate', 'CPPendDate']):
-    data_list = []
-    for i, file in enumerate(files):
-        # Upload files and set root
-        tree = etree.parse(file)
-        root = tree.getroot()
-        NS = get_namespace(root)
-        children = root.find('Children', NS)
-        # Get data
-        print('Extracting data from file {} out of {} from CIN Census'.format(i+1, len(files)))
-        file_data = buildchildren(children, tag_list, NS)
-        data_list.append(file_data)
-    cinrecord = pd.concat(data_list, sort=False)
-    return cinrecord
+    
+    if include_cincensus == True:
+        data_list = []
+        for i, file in enumerate(files):
+            # Upload files and set root
+            tree = etree.parse(file)
+            root = tree.getroot()
+            NS = get_namespace(root)
+            children = root.find('Children', NS)
+            # Get data
+            print('Extracting data from file {} out of {} from CIN Census'.format(i+1, len(files)))
+            file_data = buildchildren(children, tag_list, NS)
+            data_list.append(file_data)
+        cinrecord = pd.concat(data_list, sort=False)
+        return cinrecord
+    
+    else:
+        return None
 
 
 # Functions to build dataframes containing information of the child within each file
