@@ -7,13 +7,13 @@ def build_annexarecord(input_file, include_annexa, events = {'contact': {'List 1
                                              'early_help_assessment_completion': {'List 2':'Assessment completion date'},
                                              'referral': {'List 3':'Date of referral'},
                                              'assessment_start': {'List 4':'Continuous Assessment Start Date'},
-                                             'assessment_end':{'List 4':'Continuous Assessment Date of Authorisation'},
+                                             'assessment_authorised':{'List 4':'Continuous Assessment Date of Authorisation'},
                                              's47': {'List 5': 'Strategy discussion initiating Section 47 Enquiry Start Date'},
                                              'icpc': {'List 5': 'Date of Initial Child Protection Conference'},
                                              'cin_start': {'List 6': 'CIN Start Date'},
                                              'cin_end': {'List 6': 'CIN Closure Date'},
                                              'cpp_start': {'List 7': 'Child Protection Plan Start Date'},
-                                             'cpp_start': {'List 7': 'Child Protection Plan Start Date'},
+                                             'cpp_end': {'List 7': 'Child Protection Plan End Date'},
                                              'lac_start': {'List 8': 'Date Started to be Looked After'},
                                              'lac_end': {'List 8': 'Date Ceased to be Looked After'}}): 
 
