@@ -3,7 +3,7 @@
 
 Welcome!
 
-This code was originally developed by [Celine Gross](https://github.com/Cece78), [Chris Owen](https://github.com/chowen94) and [Kaj Siebert](https://github.com/kws) at Social Finance as part of a grant funded programme to support Local Authorities to collaborate on data analysis. The programme was called the ‘Front Door Data Collaboration’. It was supported financially by the Christie Foundation and Nesta (through the ‘What Worls Centre for Children’s Social Care’) and the LAs whose staff guided its development were Bracknell Forest, West Berkshire, Southampton, and Surrey. It also benefitted from advice from the National Performance and Information Managers Group.
+This code was originally developed by [Celine Gross](https://github.com/Cece78), [Chris Owen](https://github.com/chowen94) and [Kaj Siebert](https://github.com/kws) at Social Finance as part of a grant funded programme to support Local Authorities to collaborate on data analysis. The programme was called the ‘Front Door Data Collaboration’. It was supported financially by the Christie Foundation and Nesta (through the ‘What Works Centre for Children’s Social Care’). The LAs whose staff guided its development were Bracknell Forest, West Berkshire, Southampton, and Surrey. It also benefitted from advice from the National Performance and Information Managers Group.
 
 We are happy to share this code hoping that other data analysts may benefit from a quick way to standardize Annex A and CIN Census to conduct more analysis. 
 
@@ -26,15 +26,15 @@ To run this programme, you will need to have installed Python and created a cond
 Once that is done, follow the steps detailed below:
 
 If you have Annex A data:
-1. Run the 10-annexa-MERGE step
-2. Run the 20-annexa-CLEAN step
-3. Run the 30-annexa-CUSTOM_CLEAN step (optional)
+- 1. Run the 10-annexa-MERGE step
+- 2. Run the 20-annexa-CLEAN step
+- 3. Run the 30-annexa-CUSTOM_CLEAN step (optional)
 
 If you have CIN Census data:
-4. Run the 40-cincensus-CLEAN step
+- 4. Run the 40-cincensus-CLEAN step
 
 Once you have cleaned Annex A and/or CIN Census:
-5. Run the 50-all-LOG step
+- 5. Run the 50-all-LOG step
 
 You're done!
 
@@ -55,7 +55,7 @@ sources = find_sources('examples/example-A-2005.xls', 'examples/example-B-2004.x
 ```
 sources = find_sources('examples/example-*.*', data_sources=data_sources)
 ```
-You can follow the full, step-by-step walk-through of this step in [docs/merger-components.ipynb](docs/merger-components.ipynb).
+You can follow the full, step-by-step walk-through of this step in docs/merger-components.ipynb.
 
 
 ## Step 2: 20-annexa-CLEAN
