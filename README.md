@@ -7,13 +7,15 @@ This code was originally developed by [Celine Gross](https://github.com/Cece78),
 
 We are happy to share this code hoping that other data analysts may benefit from a quick way to standardize Annex A and CIN Census to conduct more analysis. 
 
+/!\ The code operates off of a Local Authority's CIN Census XML data and is not suitable for DfE's consolidated CIN Census database.
+
 You can find more info about Social Finance Digital Labs on our website: https://www.sfdl.org.uk/
 
 
 
 # What is this code about?
 
-**What if you could conduct analysis on Annex A and CIN Census without worrying about cleaning the data first?**
+**What if you could conduct analysis on a Local Authority's Annex A and CIN Census without worrying about cleaning the data first?**
 
 Conducting varied pieces of analysis off of Annex A and CIN Census data required us to repeatedly clean the data of typos, inconsistencies, incorrect column labels, and many more fun things. We realised that there was value in writing a "cleaner" that would standardize the data so that we could get on with the analysis without re-cleaning each time.
 
@@ -30,7 +32,7 @@ If you have Annex A data:
 - 2. Run the 20-annexa-CLEAN step
 - 3. Run the 30-annexa-CUSTOM_CLEAN step (optional)
 
-If you have CIN Census data:
+If you have CIN Census data (XML):
 - 4. Run the 40-cincensus-CLEAN step
 
 Once you have cleaned Annex A and/or CIN Census:
@@ -81,7 +83,7 @@ To run this step, open the 30-annexa-CUSTOM_CLEAN notebook and run all the cells
 
 ## Step 4: 40-cincensus-CLEAN
 
-The 40-cincensus-CLEAN goes over one or several CIN Census files and performs a quick, low-level cleaning. This programme will output one item for each input item:
+The 40-cincensus-CLEAN goes over one or several CIN Census files (**XML**) and performs a quick, low-level cleaning. This programme will output one item for each input item:
 - A "cleaned" version of each CIN Census file ("cleaned-{}.xml"): The cleaning consists of removing empty or incomplete tags, removing trailing spaces, checking that date fields are dates, checking that codes used are aligned with the CIN Census guidance. If a field is not of the correct type/code, the code will add a "Not in proper format" mention to the data field. The user can open the clean XML and search for "Not in proper format" and manually edit if needed.
 
 To run this step, open the 40-cincensus-CLEAN notebook and run all the cells. You need to input the CIN folder filepath.
