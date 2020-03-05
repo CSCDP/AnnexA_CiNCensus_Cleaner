@@ -22,6 +22,13 @@ def build_cinrecord(files, include_cincensus, tag_list=['CINreferralDate', 'CINc
             file_data = buildchildren(children, tag_list, NS)
             data_list.append(file_data)
         cinrecord = pd.concat(data_list, sort=False)
+        
+        # Remove duplicates of LAchildID, Date and Type - we keep the one with the least null values
+        cinrecord['null_values'] = cinrecord.isnull().sum(axis=1)
+        cinrecord = cinrecord.sort_values('null_values')
+        cinrecord.drop_duplicates(subset=['LAchildID', 'Date', 'Type'], keep='first', inplace=True)
+        cinrecord.drop(labels='null_values', axis=1, inplace=True)
+        
         return cinrecord
     
     else:

@@ -128,7 +128,10 @@ def clean(input_file, output_file, matching_report_file, data_config, **args):
                 first_cell = 'C{}'.format(len(ws['C']) - len(match) + 1)
                 # Add cells
                 dv.add('{}:{}'.format(first_cell, last_cell))
-               
+        
+        # Take out duplicates
+        df.drop_duplicates(inplace=True)
+        
         # Save cleaned sheet into excel sheet
         df.to_excel(writer_clean, sheet_name=item, index=False)
 
