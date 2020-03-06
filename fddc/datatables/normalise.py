@@ -12,7 +12,7 @@ def normalise_dataframe(
         df: pd.DataFrame,
         column_names: Iterable[str],
         column_map: Mapping[str, str] = None,
-        only_retain_mapped:bool = True
+        only_retain_mapped: bool = True
 ) -> pd.DataFrame:
     """
     Renames columns and adds any missing (unmatched) columns
@@ -49,7 +49,7 @@ def _clean_date_column(df: pd.DataFrame, col_name: str) -> pd.DataFrame:
 
     df[after_col] = pd.to_datetime(df[col_name], dayfirst=True, errors="coerce")
 
-    error_values = df[~df[col_name].isnull() & df[after_col].isnull()][col_name].values.tolist()
+    # error_values = df[~df[col_name].isnull() & df[after_col].isnull()][col_name].values.tolist()
     # error_values = [{"sourcename": sheet.source_config.name,
     #                  "sheetname": sheet.sheet_detail.sheetname,
     #                  "column": col_name,

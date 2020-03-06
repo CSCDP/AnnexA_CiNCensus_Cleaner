@@ -38,7 +38,7 @@ class FileSource:
             raise TypeError(f"Cannot coerce {type(value)} to a FileSource")
 
 
-def find_input_files(source: Union[ScanSource,str]) -> List[FileSource]:
+def find_input_files(source: Union[ScanSource, str]) -> List[FileSource]:
     """
     Processes a single item in the input config.
     """

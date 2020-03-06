@@ -16,7 +16,7 @@ class TestFileScanner(unittest.TestCase):
         result = file_scanner.find_input_files(ScanSource(include=os.path.join(PROJECT_ROOT, "**/ex*.xlsx")))
         self.assertEqual(len(result), 1)
 
-        filesource  = result[0]
+        filesource = result[0]
         self.assertEqual('mples/example-B-2004.xlsx', filesource.filename[-25:])
 
     def test_find_input_files_multiext(self):
@@ -28,5 +28,5 @@ class TestFileScanner(unittest.TestCase):
             include=os.path.join(PROJECT_ROOT, "**/ex*.xls*"),
             sort_keys=[r'/.*?(\d+).*/\1/i'])
         )
-        filesource  = result[0]
-        self.assertEqual('2004', filesource.sort_key)
+        sort_keys = {r.sort_key for r in result}
+        self.assertSetEqual({'2004', '2005'}, sort_keys)
