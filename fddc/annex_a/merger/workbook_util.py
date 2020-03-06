@@ -42,7 +42,7 @@ def find_worksheets(source: FileSource, file_source: ExcelFileSource = ExcelFile
         for ix, row in enumerate(sheet.get_rows()):
             row_length = 0
             for col in row:
-                if col.value is not None and len(col.value.strip()) > 0:
+                if col.value is not None and len(str(col.value).strip()) > 0:
                     header_row_index = ix + 1
                     row_length += 1
             if row_length > 3:
